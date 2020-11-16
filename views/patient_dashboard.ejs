@@ -1,9 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Patient Health Dashboard</title>
+    <title>Patient Health Dashboard</title>
+    <script src="/javascripts/d3.v5.min.js"></script>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
-<script src="/javascripts/d3.v5.min.js"></script>
+
 <style type="text/css">
   .line {
       fill: none;
@@ -25,83 +28,68 @@
 
 </style>
 <body>
-<h1>Patient Health Dashboard Prototype by Junle Lu</h1>
-  <div class="grid-container">
+
+<div class="topnav">
+  <div class="topnav-left" >
+    <a href="/patient_dashboard" style="color:white;margin-left:10px;font-size:20px" > Patient Health Dashboard </a>
+  </div>
+  <div class="topnav-right">
+    <a href="/setting">Setting</a>
+    <a href="/">Logout</a>
+  </div>
+</div>
+
+<div class= "content" style="margin-left:20px" >
+
+  <h2>Patient Information</h2>
+  <div class="grid-container" >
     <header class="header">
       <div>
         Patient Name:
-        <span class="banner-value" id="patient_name" style="font-weight:bold">..</span>
+        <span class="ob-value" id="patient_name" style="font-weight:bold">..</span>
         <br>
         Gender:
-        <span class="banner-value" id="gender" style="font-weight:bold">..</span>
+        <span class="ob-value" id="gender" style="font-weight:bold">..</span>
         <br>
         DOB:
-        <span class="banner-value" id="dob" style="font-weight:bold" >..</span>
+        <span class="ob-value" id="dob" style="font-weight:bold" >..</span>
+        <br>
+        Weight:
+        <span class="ob-value" id="weight" style="font-weight:bold" >..</span>
+        <br>
+        Height:
+        <span class="ob-value" id="height" style="font-weight:bold" >..</span>
+        <br>
       </div>
     </header>
   </div>
-<br>
-        <div class="card">
-          <div class="title">
-            Medication Requests
-          </div>
-          <ul id="med_list"></ul>
-        </div>
-<!--
-    <main class="main">
-      <div class="main-overview">
-        <div class="small-card">
-          <div>Height</div>
-          <div class="ob-value" id="height">undefined</div>
-        </div>
-        <div class="small-card">
-          <div>Weight</div>
-          <div class="ob-value" id="weight">undefined</div>
-        </div>
-        <div class="small-card">
-          <div>Systolic Blood Pressure</div>
-          <div class="ob-value" id="sys">undefined</div>
-        </div>
-        <div class="small-card">
-          <div>Diastolic Blood Pressure</div>
-          <div class="ob-value" id="dia">undefined</div>
-        </div>
-        <div class="small-card">
-          <div>LDL</div>
-          <div class="ob-value" id="ldl">undefined</div>
-        </div>
-        <div class="small-card">
-          <div>HDL</div>
-          <div class="ob-value" id="hdl">undefined</div>
-        </div>
-      </div>
 
-      <div class="big-card">
-        <div class="card">
-          <div class="title">
-            Add an Annotation for the Weight Observation
-          </div>
-        <span>  <input class="annotation-box" id="annotation">
-          <button class="annotation-button" id="add">Add</button></span>
-          <div class="annotations">
-          Latest Annotation
-          <li id="note">No annotations</li>
-          </div>
-        </div>
+  <h2> Vital Signs </h2>
+  <div class="grid-container" >
+    <header class="header">
+      <div>
+        Heart Rate:
+        <span class="ob-value" id="heart_rate" style="font-weight:bold">..</span>
+        <br>
+        Temperature:
+        <span class="ob-value" id="temperature" style="font-weight:bold">..</span>
+        <br>
+        Blood Pressure:
+        <span class="ob-value" id="blood_pressure" style="font-weight:bold" >..</span>
+        <br>
+        Respiratory Rate:
+        <span class="ob-value" id="respiratory_rate" style="font-weight:bold" >..</span>
+        <br>
 
-        <div class="card">
-          <div class="title">
-            Medication Requests
-          </div>
-          <ul id="med_list"></ul>
-        </div>
       </div>
-      <a href="patient_health_d3.html">Patient Health Portal</a>
-    </main>
+    </header>
   </div>
-  -->
+
+    <br>
+   <h2> PROTOTYPE Data visualization. This is from mini project 3. I will see if I will do some data visualization on this project </h2>
   <script src="/javascripts/fhir-client.js"></script>
   <script src="/javascripts/get-data-test.js"></script>
+</div>
 </body>
 
 </html>
