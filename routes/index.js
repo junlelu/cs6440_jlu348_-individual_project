@@ -3,7 +3,7 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Care Taker Monitoring App' });
+  res.render('index', { title: 'Caretaker Monitoring App' });
 });
 
 router.get('/patient_dashboard', function(req, res) {
