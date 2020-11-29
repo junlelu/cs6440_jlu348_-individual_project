@@ -3,6 +3,7 @@
 <head>
     <title>Patient Health Dashboard</title>
     <script src="/javascripts/d3.v5.min.js"></script>
+    <script src="/javascripts/fhir-crud-op.js"> </script>
     <link rel='stylesheet' href='/stylesheets/style.css' />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
@@ -21,13 +22,13 @@
   </div>
 </div>
 
-<div class= "content" >
+<div class= "content" style="margin-top: 50px;margin-left: 50px" >
   <h2>Patient Information</h2>
   <div class="grid-container" >
     <header class="header">
       <div>
         Patient Name:
-        <span class="ob-value" id="patient_name" style="font-weight:bold">..</span>
+        <span class="ob-value" id="pname" style="font-weight:bold">..</span>
         <br>
         Gender:
         <span class="ob-value" id="gender" style="font-weight:bold">..</span>
@@ -35,12 +36,14 @@
         DOB:
         <span class="ob-value" id="dob" style="font-weight:bold" >..</span>
         <br>
+        <!--
         Weight:
         <span class="ob-value" id="weight" style="font-weight:bold" >..</span>
         <br>
         Height:
         <span class="ob-value" id="height" style="font-weight:bold" >..</span>
         <br>
+        -->
       </div>
     </header>
   </div>
@@ -49,17 +52,26 @@
   <div class="grid-container" >
     <header class="header">
       <div>
+        <span class="ob-value" id="time_stamp" style="font-weight:bold">..</span>
+        <br>
+        <br>
         Heart Rate:
         <span class="ob-value" id="heart_rate" style="font-weight:bold">..</span>
         <br>
         Temperature:
         <span class="ob-value" id="temperature" style="font-weight:bold">..</span>
         <br>
-        Blood Pressure:
-        <span class="ob-value" id="blood_pressure" style="font-weight:bold" >..</span>
+        Diastolic Blood Pressure:
+        <span class="ob-value" id="diastolic_blood_pressure" style="font-weight:bold" >..</span>
+        <br>
+        Systolic Blood Pressure:
+        <span class="ob-value" id="systolic_blood_pressure" style="font-weight:bold" >..</span>
         <br>
         Respiratory Rate:
         <span class="ob-value" id="respiratory_rate" style="font-weight:bold" >..</span>
+        <br>
+        Oxygen Level:
+        <span class="ob-value" id="oxygen_level" style="font-weight:bold" >..</span>
         <br>
       </div>
     </header>
@@ -69,8 +81,9 @@
    <h2> PROTOTYPE Data visualization. This is from mini project 3. I will see if I will do some data visualization on this project </h2>
 
   <script src="/javascripts/fhir-client.js"> </script>
-  <script src="/javascripts/init_data.js"> </script>
+  <script src="/javascripts/get-vital-data.js"> </script>
 </div>
+
 </body>
 
 </html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Patient Health Dashboard</title>
+    <script src="/javascripts/d3.v5.min.js"></script>
+    <script src="/javascripts/fhir-crud-op.js"> </script>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<style >
+</style>
+<body>
+
+<div class="topnav">
+    <div class="topnav-left" >
+        <a href="/admin" style="color:white;margin-left:10px;font-size:20px" > Administrator </a>
+    </div>
+    <div class="topnav-right">
+        <a href="/setting">Setting</a>
+        <a href="/">Logout</a>
+    </div>
+</div>
+
+<div class= "content" style="margin-left: 100px; margin-top: 50px" >
+    <h2> Patient Data Control Panel </h2>
+    <p> The operations are not in synchronized and also things may be cached. So, you many want to wait for some secs before the date and status are reflected from the FHIR server</p>
+    <script src="/javascripts/fhir-client.js"> </script>
+    <button onclick="initialize_fhir_data('true')">Delete Patient Data</button>
+    <button onclick="initialize_fhir_data('false')">Initialize Patient Data</button>
+    <button onclick="initialize_fhir_data('checking_only')">Report Patient Data</button>
+    <p id="Output" style="white-space: pre-wrap"></p>
+</div>
+
+</body>
+
+</html>

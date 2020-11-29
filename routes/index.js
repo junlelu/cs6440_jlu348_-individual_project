@@ -9,7 +9,9 @@ router.get('/', function(req, res, next) {
 router.get('/patient_dashboard', function(req, res) {
   res.render('patient_dashboard', { title: 'Patient Dashboard' });
 });
-
+router.get('/admin', function(req, res) {
+  res.render('admin', { title: 'Administrator' });
+});
 router.get('/setting', function(req, res) {
   res.render('setting', { title: 'User Setting' });
 });
