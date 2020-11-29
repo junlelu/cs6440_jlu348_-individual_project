@@ -7,18 +7,13 @@ var express = require('express'),
     passportLocalMongoose =
         require("passport-local-mongoose"),
     User = require("./models/user");
-mongoose.set('useNewUrlParser', true);
-mongoose.set('useFindAndModify', false);
-mongoose.set('useCreateIndex', true);
-mongoose.set('useUnifiedTopology', true);
-mongoose.connect("mongodb://localhost/auth_demo_app");
 
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-
+var dbRouter = require('./routes/db');
 var app = express();
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -44,46 +39,8 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/',dbRouter);
 
-// Handling user signup
-app.post("/register", function (req, res) {
-  var username = req.body.username
-  var password = req.body.password
-  User.register(new User({ username: username }),
-      password, function (err, user) {
-        if (err) {
-          console.log(err);
-          return res.render("admin",{error:err});
-        }
-
-        passport.authenticate("local")(
-            req, res, function () {
-              res.render("admin");
-            });
-      });
-});
-
-//Handling user login
-app.post("/login", passport.authenticate("local", {
-  successRedirect: "/admin",
-  failureRedirect: "/"
-}), function (req, res) {
-});
-
-function isLoggedIn(req, res, next) {
-  if (req.isAuthenticated()) return next();
-  res.redirect("/login");
-};
-
-app.get('/users_list', function(req, res) {
-    User.find({}, function (err, users) {
-        if (err) {
-            res.send("Something went wrong!");
-            next();
-        }
-        res.json(users);
-    });
-});
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));

@@ -25,9 +25,10 @@
 
 <div class= "content" style="margin-left: 100px; margin-top: 50px" >
 
-    <h1> Create new user </h1>
+
 
     <form action="/register" method="POST">
+        <h1> Create new user </h1>
         <input type="text" name="username"
                placeholder="username">
         <input type="password" name="password"
@@ -35,8 +36,28 @@
         <button>Submit</button>
     </form>
 
-    <p><%= error.name %></p>
-    <p><%= error.message %></p>
+    <form action="/users_list" method="POST">
+        <h1> Print all users </h1>
+        <button>Submit</button>
+    </form>
+
+    <p>
+        <% if (locals.error) { %>
+            <%=error.name%>
+        <%}%>
+    </p>
+    <p>
+        <% if (locals.error) { %>
+        <%=error.message%>
+        <%}%>
+    </p>
+    <p>
+        <% if (locals.result) { %>
+        <%=result%>
+        <%}%>
+    </p>
+
+
 
     <hr>
     <h2> Patient Data Control Panel </h2>
