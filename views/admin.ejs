@@ -2,7 +2,7 @@
 <html>
 <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
 <head>
-    <title>Patient Health Dashboard</title>
+    <title>Administrator</title>
     <script src="/javascripts/d3.v5.min.js"></script>
     <script src="/javascripts/fhir-crud-op.js"> </script>
     <link rel='stylesheet' href='/stylesheets/style.css' />
@@ -24,8 +24,23 @@
 </div>
 
 <div class= "content" style="margin-left: 100px; margin-top: 50px" >
+
+    <h1> Create new user </h1>
+
+    <form action="/register" method="POST">
+        <input type="text" name="username"
+               placeholder="username">
+        <input type="password" name="password"
+               placeholder="password">
+        <button>Submit</button>
+    </form>
+
+    <p><%= error.name %></p>
+    <p><%= error.message %></p>
+
+    <hr>
     <h2> Patient Data Control Panel </h2>
-    <p> The operations are not in synchronized and also things may be cached. So, you many want to wait for some secs before the date and status are reflected from the FHIR server</p>
+    <p> The operations are not asynchronous and also things may be cached. So, you many want to wait for some seconds before the data updates are reflected.</p>
     <script src="/javascripts/fhir-client.js"> </script>
     <button onclick="initialize_fhir_data('true')">Delete Patient Data</button>
     <button onclick="initialize_fhir_data('false')">Initialize Patient Data</button>

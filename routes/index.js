@@ -1,4 +1,5 @@
 var express = require('express');
+
 var router = express.Router();
 
 /* GET home page. */
@@ -10,7 +11,7 @@ router.get('/patient_dashboard', function(req, res) {
   res.render('patient_dashboard', { title: 'Patient Dashboard' });
 });
 router.get('/admin', function(req, res) {
-  res.render('admin', { title: 'Administrator' });
+  res.render('admin', {error: {name: '', message: ''}});
 });
 router.get('/setting', function(req, res) {
   res.render('setting', { title: 'User Setting' });
