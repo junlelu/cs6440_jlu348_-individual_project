@@ -1,7 +1,7 @@
-//adapted from the cerner smart on fhir guide. updated to utalize client.js v2 library and FHIR R4
+//adapted from the cerner smart on fhir guide. updated to utilize client.js v2 library and FHIR R4
 
 
-//create a fhir client based on the sandbox enviroment and test paitnet.
+//create a fhir client based on the sandbox environment and test patient.
 const client = new FHIR.client({
   serverUrl: "https://r4.smarthealthit.org",
   tokenResponse: {
@@ -170,10 +170,10 @@ function displayAnnotation(annotation) {
 
 //function to display the observation values you will need to update this
 function displayObservation(obs) {
-  hdl.innerHTML = obs.hdl;
-  ldl.innerHTML = obs.ldl;
-  sys.innerHTML = obs.sys;
-  dia.innerHTML = obs.dia;
+  //hdl.innerHTML = obs.hdl;
+  //ldl.innerHTML = obs.ldl;
+  //sys.innerHTML = obs.sys;
+  //dia.innerHTML = obs.dia;
   height.innerHTML = obs.height;
   weight.innerHTML = obs.weight;
 }
@@ -201,6 +201,8 @@ query.set("code", [
   'http://loinc.org|3141-9',
   'http://loinc.org|8302-2',
   'http://loinc.org|29463-7',
+  'http://loinc.org|9279-1',
+  'http://loinc.org|8310-5',
 ].join(","));
 
 client.request("Observation?" + query, {
@@ -209,7 +211,7 @@ client.request("Observation?" + query, {
 }).then(
   function(ob) {
 
-    // group all of the observation resoruces by type into their own
+    // group all of the observation resources by type into their own
     var byCodes = client.byCodes(ob, 'code');
     var systolicbp = getBloodPressureValue(byCodes('55284-4'), '8480-6');
     var diastolicbp = getBloodPressureValue(byCodes('55284-4'), '8462-4');
@@ -217,7 +219,8 @@ client.request("Observation?" + query, {
     var ldl = byCodes('2089-1');
     var height = byCodes('8302-2');
     var weight = byCodes('29463-7');
-
+    var respiratory_rate = byCodes('8310-5');
+    console.log("repiratory",respiratory_rate);
     // create patient object
     var p = defaultPatient();
 
@@ -258,10 +261,10 @@ client.request("Observation?" + query, {
         bmi_data.push({x: d3.isoParse(height[i]["effectiveDateTime"]), y: weight_data[i]['y']*10000/height_tmp/height_tmp});
     }
 
-    make_plot(height_data,"blue","Height Chart","Year", height_unit.toUpperCase());
-    make_plot(weight_data,"gold","Weight Chart", "Year", weight_unit.toUpperCase());
-    make_plot(bmi_data,"red","BMI Chart", "Year","kg/cm");
-    //displayObservation(p);
+    //make_plot(height_data,"blue","Height Chart","Year", height_unit.toUpperCase());
+    //make_plot(weight_data,"gold","Weight Chart", "Year", weight_unit.toUpperCase());
+    //make_plot(bmi_data,"red","BMI Chart", "Year","kg/cm");
+    displayObservation(p);
   });
 
 var query = new URLSearchParams();
@@ -286,7 +289,7 @@ function display(data) {
   // get medication request resources this will need to be updated
   // the goal is to pull all the medication requests and display it in the app. It can be both active and stopped medications
   medResults.forEach(function(med) {
-    displayMedication(med);
+    //displayMedication(med);
   })
 }
 
