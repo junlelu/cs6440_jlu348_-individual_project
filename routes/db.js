@@ -28,6 +28,9 @@ router.post("/register", function (req, res) {
         });
 });
 
+router.get("/login", function (req, res) {
+    res.render("login");
+});
 //Handling user login
 router.post("/login", passport.authenticate("local", {
     successRedirect: "/admin",
