@@ -7,7 +7,8 @@ mongoose.set('useNewUrlParser', true);
 mongoose.set('useFindAndModify', false);
 mongoose.set('useCreateIndex', true);
 mongoose.set('useUnifiedTopology', true);
-mongoose.connect("mongodb://localhost/auth_demo_app");
+var MONGODB_URI = process.env.MONGODB_URL || "mongodb://localhost/jlu348_db";
+mongoose.connect(MONGODB_URI);
 var router = express.Router();
 
 // Handling user signup
