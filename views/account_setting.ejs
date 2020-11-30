@@ -54,26 +54,33 @@
                     <input type="submit" class="col-xs-12 btn btn-primary btn-load btn-lg"
                            data-loading-text="Changing Password..." value="Change Password">
                 </form>
+                <br>
+                <br>
+                <br>
+                <br>
+                <p>
+                    <% if (locals.error) { %>
+                        <%= error.name %>
+                    <% } %>
+                </p>
+                <p>
+                    <% if (locals.error) { %>
+                        <%= error.message %>
+                    <% } %>
+                </p>
+                <p>
+                    <% if (locals.result) { %>
+                        <%= result %>
+                    <% } %>
+                </p>
             </div><!--/col-sm-6-->
+
         </div><!--/row-->
+
     </div>
 </div>
 
-<p>
-    <% if (locals.error) { %>
-        <%= error.name %>
-    <% } %>
-</p>
-<p>
-    <% if (locals.error) { %>
-        <%= error.message %>
-    <% } %>
-</p>
-<p>
-    <% if (locals.result) { %>
-        <%= result %>
-    <% } %>
-</p>
+
 <script>
 
     $("input[type=password]").keyup(function () {

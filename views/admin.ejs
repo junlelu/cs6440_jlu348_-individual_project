@@ -80,8 +80,8 @@
                 <button>Update!</button>
             </form>
         </div>
-        <div class="column" style="background-color:black;color:green">
-            <p>Database operation results:</p>
+        <div class="column" >
+            <h4>Database operation results:</h4>
             <p>
                 <% if (locals.error) { %>
                     <%= error.name %>
@@ -108,7 +108,7 @@
     <button onclick="initialize_fhir_data('true')">Delete Patient Data</button>
     <button onclick="initialize_fhir_data('false')">Initialize Patient Data</button>
     <button onclick="initialize_fhir_data('checking_only')">Report Patient Data</button>
-    <p id="Output" style="background-color:black;color:green;white-space: pre-wrap"></p>
+    <p id="Output" style="white-space: pre-wrap"></p>
 </div>
 
 </body>

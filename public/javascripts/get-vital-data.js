@@ -1,13 +1,9 @@
 function get_patient_vital_data(patient_name) {
-//const client = FHIR.client("https://apps.hdap.gatech.edu/hapiR4/baseR4/");
+    //const client = FHIR.client("https://apps.hdap.gatech.edu/hapiR4/baseR4/");
     const client = FHIR.client("http://hapi.fhir.org/baseR4/");
-//var patient_name = ["jlu348_patient_4", "cs6440"];
 
     console.log("Test patient name : " + patient_name);
     var given_name = patient_name;
-//var given_name = patient_name[0];
-//var family_name = patient_name[1];
-// create patient object
     var patient_data = defaultPatient();
 
     var query = new URLSearchParams();

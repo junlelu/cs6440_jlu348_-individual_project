@@ -188,8 +188,10 @@ function initialize_fhir_data(reset_patients, fhir_servre) {
         }).then(
             function (response) {
                 console.log("Observation - " + patient_id);
+                html_output += "Found " + response.length + " observations\n";
                 if (response.length === 0 && reset_patients !== "checking_only") {
-                    console.log("Create new observation:");
+                    console.log("Created new observation:");
+                    html_output += "Created new observations.\n";
                     var heart_ob = generate_vital_sign_observation_json(init_heart_rate, patient_id);
                     var respiratory_ob = generate_vital_sign_observation_json(init_respiratory_rate, patient_id);
                     var temperature_ob = generate_vital_sign_observation_json(init_temperature, patient_id);
@@ -212,7 +214,7 @@ function initialize_fhir_data(reset_patients, fhir_servre) {
                     console.log("Found " + response.length + " observations:");
                     console.log(response);
                 }
-                html_output += "Found " + response.length + " observations\n";
+
                 document.getElementById("Output").innerHTML = html_output;
             }
         );
