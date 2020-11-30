@@ -10,6 +10,23 @@
 </head>
 
 <style>
+    * {
+        box-sizing: border-box;
+    }
+
+    /* Create two equal columns that floats next to each other */
+    .column {
+        float: left;
+        width: 50%;
+        padding: 10px;
+    }
+
+    /* Clear floats after the columns */
+    .row:after {
+        content: "";
+        display: table;
+        clear: both;
+    }
 </style>
 <body>
 
@@ -24,64 +41,74 @@
 
 <div class="content" style="margin-left: 100px; margin-top: 50px">
     <h2>MongoDB</h2>
-    <h3> Create an new user </h3>
-    <form action="/admin/register" method="POST">
-        <input type="text" name="username"
-               placeholder="username" autocomplete="off">
-        <input type="password" name="password"
-               placeholder="password" autocomplete="off">
-        <input type="role" name="role"
-               placeholder="role" autocomplete="off">
-        <input type="patient_id" name="patient_id"
-               placeholder="patient_id" autocomplete="off">
-        <button>Submit</button>
-    </form>
 
-    <h3> Print all users in the databse </h3>
-    <form action="/admin/print_all_users" method="POST">
-        <button>Show!</button>
-    </form>
+    <div class="row">
+        <div class="column" >
+            <h3> Create an new user </h3>
+            <form action="/admin/register" method="POST">
+                <input type="text" name="username"
+                       placeholder="username" autocomplete="off">
+                <input type="password" name="password"
+                       placeholder="password" autocomplete="off">
+                <input type="role" name="role"
+                       placeholder="role" autocomplete="off">
+                <input type="patient_id" name="patient_id"
+                       placeholder="patient_id" autocomplete="off">
+                <br>
+                <br>
+                <button>Submit</button>
+            </form>
 
-    <h3> Delete all users in the database </h3>
-    <form action="/admin/delete_all_users" method="POST">
-        <button>Delete!</button>
-    </form>
+            <h3> Print all users in the databse </h3>
+            <form action="/admin/print_all_users" method="POST">
+                <button>Show!</button>
+            </form>
 
-    <h3> Update user password in the database </h3>
-    <form action="/admin/update_password" method="POST">
-        <input type="text" name="username"
-               placeholder="username">
-        <input type="new_password" name="new_password"
-               placeholder="password">
-        <button>Update!</button>
-    </form>
+            <h3> Delete all users in the database </h3>
+            <form action="/admin/delete_all_users" method="POST">
+                <button>Delete!</button>
+            </form>
 
-    <h4>Database operation results:</h4>
-    <p>
-        <% if (locals.error) { %>
-        <%= error.name %>
-        <% } %>
-    </p>
-    <p>
-        <% if (locals.error) { %>
-        <%= error.message %>
-        <% } %>
-    </p>
-    <p>
-        <% if (locals.result) { %>
-        <%= result %>
-        <% } %>
-    </p>
+            <h3> Update user password in the database </h3>
+            <form action="/admin/update_password" method="POST">
+                <input type="text" name="username"
+                       placeholder="username">
+                <input type="new_password" name="new_password"
+                       placeholder="password">
+                <br>
+                <br>
+                <button>Update!</button>
+            </form>
+        </div>
+        <div class="column" style="background-color:black;color:green">
+            <p>Database operation results:</p>
+            <p>
+                <% if (locals.error) { %>
+                    <%= error.name %>
+                <% } %>
+            </p>
+            <p>
+                <% if (locals.error) { %>
+                    <%= error.message %>
+                <% } %>
+            </p>
+            <p>
+                <% if (locals.result) { %>
+                    <%= result %>
+                <% } %>
+            </p>
+        </div>
+    </div>
 
     <hr>
     <h2> Patient Data Control Panel </h2>
-    <p> The operations are not asynchronous and also things may be cached. So, you many want to wait for some seconds
+    <p> Warning: The operations are asynchronous and also things may be cached. So, you many want to wait for some seconds
         before the data updates are reflected.</p>
     <script src="/javascripts/fhir-client.js"></script>
     <button onclick="initialize_fhir_data('true')">Delete Patient Data</button>
     <button onclick="initialize_fhir_data('false')">Initialize Patient Data</button>
     <button onclick="initialize_fhir_data('checking_only')">Report Patient Data</button>
-    <p id="Output" style="white-space: pre-wrap"></p>
+    <p id="Output" style="background-color:black;color:green;white-space: pre-wrap"></p>
 </div>
 
 </body>
