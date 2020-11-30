@@ -1,12 +1,10 @@
 var createError = require('http-errors');
 var express = require('express'),
-    mongoose = require("mongoose"),
     passport = require("passport"),
     bodyParser = require("body-parser"),
     LocalStrategy = require("passport-local"),
-    passportLocalMongoose =
-        require("passport-local-mongoose"),
     User = require("./models/user");
+
 const cors = require("cors");
 var path = require('path');
 var cookieParser = require('cookie-parser');
@@ -14,7 +12,9 @@ var logger = require('morgan');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var dbRouter = require('./routes/db');
+
 var app = express();
+
 app.use(cors());
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

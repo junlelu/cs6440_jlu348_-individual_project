@@ -20,24 +20,12 @@
 <div class= "content" style="margin-top:20px" >
     <h1 style="color:black;font-size:20px;text-align:center;" > Remote Caretaker Monitoring Tool </h1>
 
-    <form action="/login" method="POST">
-        <input type="text" name="username"
-               placeholder="username">
-        <input type="password" name="password"
-               placeholder="password">
-        <button>login</button>
-    </form>
-
-    <li><a href="/register">Sign up!!</a></li>
-    <li><a href="/login">Login</a></li>
-    <li><a href="/logout">Logout</a></li>
-
     <div id="login" style="color:black">
         <div class="container" style="color:black">
             <div id="login-row" class="row justify-content-center align-items-center">
                 <div id="login-column" class="col-md-6">
                     <div id="login-box" >
-                        <form id="login-form" class="form" action="/patient_dashboard" method="post">
+                        <form id="login-form" class="form" action="/login" method="post">
                             <h3 class="text-center">Login</h3>
                             <div class="form-group">
                                 <label for="username"  >Username:</label><br>
