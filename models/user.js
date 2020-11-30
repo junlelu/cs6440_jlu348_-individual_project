@@ -2,7 +2,9 @@ var mongoose=require("mongoose");
 var passportlocalmongoose=require("passport-local-mongoose");
 var UserSchema=mongoose.Schema({
     username: String,
-    Password: String
+    password: String,
+    role: String,
+    patient_id: String
 });
 
 UserSchema.plugin(passportlocalmongoose);

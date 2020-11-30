@@ -3,7 +3,8 @@ var express = require('express'),
     passport = require("passport"),
     bodyParser = require("body-parser"),
     LocalStrategy = require("passport-local"),
-    User = require("./models/user");
+    User = require("./models/user"),
+    flash = require("flash");
 
 const cors = require("cors");
 var path = require('path');
@@ -26,6 +27,7 @@ app.use(require("express-session")({
   resave: false,
   saveUninitialized: false
 }));
+app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
 

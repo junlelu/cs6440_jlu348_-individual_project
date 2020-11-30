@@ -4,65 +4,81 @@
 <head>
     <title>Administrator</title>
     <script src="/javascripts/d3.v5.min.js"></script>
-    <script src="/javascripts/fhir-crud-op.js"> </script>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <script src="/javascripts/fhir-crud-op.js"></script>
+    <link rel='stylesheet' href='/stylesheets/style.css'/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
-<style >
+<style>
 </style>
 <body>
 
 <div class="topnav">
-    <div class="topnav-left" >
-        <a href="/admin" style="color:white;margin-left:10px;font-size:20px" > Administrator </a>
+    <div class="topnav-left">
+        <a href="/admin" style="color:white;margin-left:10px;font-size:20px"> Administrator </a>
     </div>
     <div class="topnav-right">
-        <a href="/setting">Setting</a>
+        <a href="/account_setting">Setting</a>
         <a href="/">Logout</a>
     </div>
 </div>
 
-<div class= "content" style="margin-left: 100px; margin-top: 50px" >
-
-
-
-    <form action="/register" method="POST">
-        <h1> Create new user </h1>
+<div class="content" style="margin-left: 100px; margin-top: 50px">
+    <h2>MongoDB</h2>
+    <h3> Create an new user </h3>
+    <form action="/admin/register" method="POST">
         <input type="text" name="username"
                placeholder="username">
         <input type="password" name="password"
                placeholder="password">
+        <input type="role" name="role"
+               placeholder="role">
+        <input type="patient_id" name="patient_id"
+               placeholder="patient_id">
         <button>Submit</button>
     </form>
 
-    <form action="/users_list" method="POST">
-        <h1> Print all users </h1>
-        <button>Submit</button>
+    <h3> Print all users in the databse </h3>
+    <form action="/admin/print_all_users" method="POST">
+        <button>Show!</button>
     </form>
 
+    <h3> Delete all users in the database </h3>
+    <form action="/admin/delete_all_users" method="POST">
+        <button>Delete!</button>
+    </form>
+
+    <h3> Update user password in the database </h3>
+    <form action="/admin/update_password" method="POST">
+        <input type="text" name="username"
+               placeholder="username">
+        <input type="new_password" name="new_password"
+               placeholder="password">
+        <button>Update!</button>
+    </form>
+
+    <h4>Database operation results:</h4>
     <p>
         <% if (locals.error) { %>
-            <%=error.name%>
-        <%}%>
+        <%= error.name %>
+        <% } %>
     </p>
     <p>
         <% if (locals.error) { %>
-        <%=error.message%>
-        <%}%>
+        <%= error.message %>
+        <% } %>
     </p>
     <p>
         <% if (locals.result) { %>
-        <%=result%>
-        <%}%>
+        <%= result %>
+        <% } %>
     </p>
-
-
 
     <hr>
     <h2> Patient Data Control Panel </h2>
-    <p> The operations are not asynchronous and also things may be cached. So, you many want to wait for some seconds before the data updates are reflected.</p>
-    <script src="/javascripts/fhir-client.js"> </script>
+    <p> The operations are not asynchronous and also things may be cached. So, you many want to wait for some seconds
+        before the data updates are reflected.</p>
+    <script src="/javascripts/fhir-client.js"></script>
     <button onclick="initialize_fhir_data('true')">Delete Patient Data</button>
     <button onclick="initialize_fhir_data('false')">Initialize Patient Data</button>
     <button onclick="initialize_fhir_data('checking_only')">Report Patient Data</button>

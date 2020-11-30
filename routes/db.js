@@ -13,10 +13,13 @@ mongoose.connect(MONGODB_URI);
 var router = express.Router();
 
 // Handling user signup
-router.post("/register", function (req, res) {
+router.post("/admin/register", function (req, res) {
     var username = req.body.username;
     var password = req.body.password;
-    User.register(new User({username: username}),
+    var role = req.body.role;
+    var patient_id = req.body.patient_id;
+
+    User.register(new User({username: username, role: role, patient_id: patient_id}),
         password, function (err, user) {
             if (err) {
                 console.log(err);
@@ -30,25 +33,95 @@ router.post("/register", function (req, res) {
         });
 });
 
+router.post('/admin/update_password' , function (req, res) {
+    var new_password = req.body.new_password;
+    var username = req.body.username;
+
+    User.findByUsername(username).then(function(sanitizedUser){
+        if (sanitizedUser){
+            sanitizedUser.setPassword(new_password, function(){
+                sanitizedUser.save();
+                res.render("admin", {result: "Updated the password!"});
+            });
+        } else {
+            return res.render("admin", {error: {message: "The username does not exist in the database.", name: "Failed to update user password."}});
+        }
+    },function(err){
+        console.error(err);
+    })
+});
+
+router.post('/user/update_password' , function (req, res) {
+    var new_password = req.body.password1;
+    var username = req.user.username;
+    console.log(username);
+    console.log(new_password);
+    User.findByUsername(username).then(function(sanitizedUser) {
+        if (new_password === undefined) {
+            return res.render("account_setting", {
+                error: {
+                    message: "Invalid password.",
+                    name: "Failed to update user password. Please log out and try again."
+                }
+            });
+        } else if (sanitizedUser) {
+            sanitizedUser.setPassword(new_password, function () {
+                sanitizedUser.save();
+                res.render("account_setting", {result: "Updated the password! Please log out and log in with new password"});
+            });
+        } else {
+            return res.render("account_setting", {
+                error: {
+                    message: "The username does not exist in the database.",
+                    name: "Failed to update user password. Please log out and try again."
+                }
+            });
+        }
+    },function(err){
+        console.error(err);
+    })
+});
+
+//Handling user login
+
 //Handling user login
 router.post("/login", passport.authenticate("local", {
     successRedirect: "/patient_dashboard",
-    failureRedirect: "/"
+    failureRedirect: "/",
+    failureMessage: "Invalid username or password"
 }), function (req, res) {
 });
 
-function isLoggedIn(req, res, next) {
-    if (req.isAuthenticated()) return next();
-    res.redirect("/login");
-}
-router.post('/users_list', function (req, res) {
+//Handling user logout
+router.get("/logout", function (req, res) {
+    req.logout();
+    req.session.messages = [];
+    res.redirect("/");
+});
+
+router.post('/admin/print_all_users', function (req, res) {
     User.find({}, function (err, users) {
         if (err) {
             res.render("admin", {result: "Something went wrong!"});
             next();
         }
-        res.render("admin", {result: users});
+        if (users.length === 0) {
+            res.render("admin", {result: "No user found in the database."});
+        } else {
+            res.render("admin", {result: users});
+        }
     });
 });
+
+router.post('/admin/delete_all_users', function (req, res) {
+    User.remove({}, function (err, users) {
+        if (err) {
+            res.render("admin", {result: "Something went wrong!"});
+            next();
+        }
+        res.render("admin", {result: "Deleted all users!"});
+    });
+});
+
 
 module.exports = router;

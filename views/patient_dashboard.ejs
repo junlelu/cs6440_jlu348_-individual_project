@@ -4,84 +4,92 @@
 <head>
     <title>Patient Health Dashboard</title>
     <script src="/javascripts/d3.v5.min.js"></script>
-    <script src="/javascripts/fhir-crud-op.js"> </script>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <script src="/javascripts/fhir-crud-op.js"></script>
+    <link rel='stylesheet' href='/stylesheets/style.css'/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
-<style >
+<style>
 </style>
 <body>
 
 <div class="topnav">
-  <div class="topnav-left" >
-    <a href="/patient_dashboard" style="color:white;margin-left:10px;font-size:20px" > Patient Health Dashboard </a>
-  </div>
-  <div class="topnav-right">
-    <a href="/setting">Setting</a>
-    <a href="/">Logout</a>
-  </div>
+    <div class="topnav-left">
+        <a href="/patient_dashboard" style="color:white;margin-left:10px;font-size:20px"> Patient Health Dashboard </a>
+    </div>
+    <div class="topnav-right">
+        <a href="/account_setting">Setting</a>
+        <a href="/logout">Logout</a>
+    </div>
 </div>
 
-<div class= "content" style="margin-top: 50px;margin-left: 50px" >
-  <h2>Patient Information</h2>
-  <div class="grid-container" >
-    <header class="header">
-      <div>
-        Patient Name:
-        <span class="ob-value" id="pname" style="font-weight:bold">..</span>
-        <br>
-        Gender:
-        <span class="ob-value" id="gender" style="font-weight:bold">..</span>
-        <br>
-        DOB:
-        <span class="ob-value" id="dob" style="font-weight:bold" >..</span>
-        <br>
-        <!--
-        Weight:
-        <span class="ob-value" id="weight" style="font-weight:bold" >..</span>
-        <br>
-        Height:
-        <span class="ob-value" id="height" style="font-weight:bold" >..</span>
-        <br>
-        -->
-      </div>
-    </header>
-  </div>
+<p style="margin-top: 10px">Logged in user:<b>
+        <% if (locals.username) { %>
+            <%= username %>
+        <% } %>
+    </b>
+</p>
 
-  <h2> Vital Signs </h2>
-  <div class="grid-container" >
-    <header class="header">
-      <div>
-        <span class="ob-value" id="time_stamp" style="font-weight:bold">..</span>
-        <br>
-        <br>
-        Heart Rate:
-        <span class="ob-value" id="heart_rate" style="font-weight:bold">..</span>
-        <br>
-        Temperature:
-        <span class="ob-value" id="temperature" style="font-weight:bold">..</span>
-        <br>
-        Diastolic Blood Pressure:
-        <span class="ob-value" id="diastolic_blood_pressure" style="font-weight:bold" >..</span>
-        <br>
-        Systolic Blood Pressure:
-        <span class="ob-value" id="systolic_blood_pressure" style="font-weight:bold" >..</span>
-        <br>
-        Respiratory Rate:
-        <span class="ob-value" id="respiratory_rate" style="font-weight:bold" >..</span>
-        <br>
-        Oxygen Level:
-        <span class="ob-value" id="oxygen_level" style="font-weight:bold" >..</span>
-        <br>
-      </div>
-    </header>
-  </div>
+<div class="content" style="margin-top: 50px;margin-left: 50px">
+
+    <h2>Patient Information</h2>
+    <div class="grid-container">
+        <header class="header">
+            <div>
+                Patient Name:
+                <span class="ob-value" id="pname" style="font-weight:bold">..</span>
+                <br>
+                Gender:
+                <span class="ob-value" id="gender" style="font-weight:bold">..</span>
+                <br>
+                DOB:
+                <span class="ob-value" id="dob" style="font-weight:bold">..</span>
+                <br>
+                <!--
+                Weight:
+                <span class="ob-value" id="weight" style="font-weight:bold" >..</span>
+                <br>
+                Height:
+                <span class="ob-value" id="height" style="font-weight:bold" >..</span>
+                <br>
+                -->
+            </div>
+        </header>
+    </div>
+
+    <h2> Vital Signs </h2>
+    <div class="grid-container">
+        <header class="header">
+            <div>
+                <span class="ob-value" id="time_stamp" style="font-weight:bold">..</span>
+                <br>
+                <br>
+                Heart Rate:
+                <span class="ob-value" id="heart_rate" style="font-weight:bold">..</span>
+                <br>
+                Temperature:
+                <span class="ob-value" id="temperature" style="font-weight:bold">..</span>
+                <br>
+                Diastolic Blood Pressure:
+                <span class="ob-value" id="diastolic_blood_pressure" style="font-weight:bold">..</span>
+                <br>
+                Systolic Blood Pressure:
+                <span class="ob-value" id="systolic_blood_pressure" style="font-weight:bold">..</span>
+                <br>
+                Respiratory Rate:
+                <span class="ob-value" id="respiratory_rate" style="font-weight:bold">..</span>
+                <br>
+                Oxygen Level:
+                <span class="ob-value" id="oxygen_level" style="font-weight:bold">..</span>
+                <br>
+            </div>
+        </header>
+    </div>
 
     <br>
 
-  <script src="/javascripts/fhir-client.js"> </script>
-  <script src="/javascripts/get-vital-data.js"> </script>
+    <script src="/javascripts/fhir-client.js"></script>
+    <script src="/javascripts/get-vital-data.js"></script>
 </div>
 
 </body>

@@ -1,51 +1,56 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
+<head>
+    <title>Remote Caretaker Monitoring Tool</title>
+    <link rel='stylesheet' href='/stylesheets/style.css'/>
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  </head>
- <style>
+</head>
+<style>
 
- </style>
-  <body>
+</style>
+<body>
 
 <div class="topnav">
-  <div class="topnav-center" >
-  </div>
+    <div class="topnav-center">
+    </div>
 </div>
 
-<div class= "content" style="margin-top:20px" >
-    <h1 style="color:black;font-size:20px;text-align:center;" > Remote Caretaker Monitoring Tool </h1>
+<div class="content" style="margin-top:20px">
+    <h1 style="color:black;font-size:20px;text-align:center;"> Remote Caretaker Monitoring Tool </h1>
 
     <div id="login" style="color:black">
         <div class="container" style="color:black">
             <div id="login-row" class="row justify-content-center align-items-center">
                 <div id="login-column" class="col-md-6">
-                    <div id="login-box" >
+                    <div id="login-box">
                         <form id="login-form" class="form" action="/login" method="post">
                             <h3 class="text-center">Login</h3>
                             <div class="form-group">
-                                <label for="username"  >Username:</label><br>
+                                <label for="username">Username:</label><br>
                                 <input type="text" name="username" id="username" class="form-control">
                             </div>
                             <div class="form-group">
                                 <label for="password">Password:</label><br>
                                 <input type="text" name="password" id="password" class="form-control">
                             </div>
-                            <div class="form-group" >
-                                <input type="submit" class="col-xs-12 btn btn-primary btn-load btn-m" data-loading-text="Loading..." value="Submit">
-                                <a href="/patient_dashboard">Prototype link to patient dashboard page</a>
-                                <a href="/admin">Prototype link to admin page</a>
+                            <p>
+                                <% if (locals.login_errors) { %>
+                                    <%= login_errors[0] %>
+                                <% } %>
+                            </p>
+                            <div class="form-group">
+                                <input type="submit" class="col-xs-12 btn btn-primary btn-load btn-m"
+                                       data-loading-text="Loading..." value="Submit">
                             </div>
                         </form>
+
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-  </body>
+</body>
 </html>
