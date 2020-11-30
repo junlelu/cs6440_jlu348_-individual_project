@@ -4,9 +4,13 @@
 <head>
     <title>Patient Health Dashboard</title>
     <script src="/javascripts/d3.v5.min.js"></script>
-    <script src="/javascripts/fhir-crud-op.js"></script>
+    <script src="/javascripts/get-vital-data.js"></script>
     <link rel='stylesheet' href='/stylesheets/style.css'/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <meta http-equiv="refresh" content="5" >
+    <meta http-equiv="cache-control" content="no-cache" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="-1" />
 </head>
 
 <style>
@@ -31,7 +35,6 @@
 </p>
 
 <div class="content" style="margin-top: 50px;margin-left: 50px">
-
     <h2>Patient Information</h2>
     <div class="grid-container">
         <header class="header">
@@ -61,6 +64,7 @@
     <div class="grid-container">
         <header class="header">
             <div>
+                Time:
                 <span class="ob-value" id="time_stamp" style="font-weight:bold">..</span>
                 <br>
                 <br>
@@ -87,9 +91,13 @@
     </div>
 
     <br>
-
     <script src="/javascripts/fhir-client.js"></script>
-    <script src="/javascripts/get-vital-data.js"></script>
+    <% if (locals.username) { %>
+        <script>
+            var patient_name = "<%= username %>";
+            get_patient_vital_data(patient_name);
+        </script>
+    <% } %>
 </div>
 
 </body>

@@ -9,10 +9,11 @@ mongoose.set('useCreateIndex', true);
 mongoose.set('useUnifiedTopology', true);
 
 var MONGODB_URI = process.env.MONGODB_URL || "mongodb://localhost/jlu348_db";
+
+
 mongoose.connect(MONGODB_URI);
 var router = express.Router();
 
-// Handling user signup
 router.post("/admin/register", function (req, res) {
     var username = req.body.username;
     var password = req.body.password;
@@ -82,17 +83,21 @@ router.post('/user/update_password' , function (req, res) {
     })
 });
 
-//Handling user login
-
-//Handling user login
 router.post("/login", passport.authenticate("local", {
-    successRedirect: "/patient_dashboard",
     failureRedirect: "/",
     failureMessage: "Invalid username or password"
 }), function (req, res) {
+    var username = req.user.username;
+    User.find({username}, function (err, user) {
+        console.log(user);
+        if (user[0].role === "admin") {
+            res.redirect("/admin");
+        } else {
+            res.redirect("/patient_dashboard");
+        }
+    });
 });
 
-//Handling user logout
 router.get("/logout", function (req, res) {
     req.logout();
     req.session.messages = [];
@@ -122,6 +127,5 @@ router.post('/admin/delete_all_users', function (req, res) {
         res.render("admin", {result: "Deleted all users!"});
     });
 });
-
 
 module.exports = router;

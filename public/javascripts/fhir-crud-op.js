@@ -1,12 +1,12 @@
-function initialize_fhir_data(reset_patients) {
+function initialize_fhir_data(reset_patients, fhir_servre) {
     document.getElementById("Output").innerHTML = "";
 //const client = FHIR.client("https://apps.hdap.gatech.edu/hapiR4/baseR4/");
     var fhir_server = "http://hapi.fhir.org/baseR4/"
     const client = FHIR.client(fhir_server);
-    var test_name = [["jlu348_patient_4", "cs6440", "1988-02-12", "male"], ["jlu348_patient_5", "cs6440", "1992-04-22", "female"]];
+    var test_name = [["jlu348_male_patient", "cs6440", "1988-02-12", "male"], ["jlu348_female_patient", "cs6440", "1992-04-22", "female"]];
     var query = new URLSearchParams();
-    var html_output = "Using FHIR server: " + fhir_server + " \n\n";
-    html_output += "Outputs:\n\n";
+    var html_output = "FHIR server: " + fhir_server + "\n";
+    html_output += "\n";
     console.log("Test names : " + test_name);
     html_output += "Patient name: \n";
     for (i = 0; i < test_name.length; i++) {
@@ -83,8 +83,8 @@ function initialize_fhir_data(reset_patients) {
                         html_output += "Creating new patient: " + given_name + "\n";
                     }
                 } else {
-                    console.log("Found " + response.length + " patients: " + patient_name);
-                    html_output += "Found " + response.length + " patient resources with given name " + given_name + "\n";
+                    console.log("Found " + response.length + " patients: " + patient_name + response[0].id);
+                    html_output += "Found " + response.length + " patient resources with given name " + given_name + " ID: " + response[0].id +"\n";
                     console.log(response);
                     if (reset_patients === "true") {
                         for (i = 0; i < response.length; i++) {
@@ -111,7 +111,6 @@ function initialize_fhir_data(reset_patients) {
                 console.log(response.issue);
             }
         );
-
     }
 
     function create_new_patient(given_name, family_name, dob, gender) {
